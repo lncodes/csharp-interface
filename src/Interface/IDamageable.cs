@@ -10,7 +10,7 @@
         /// <summary>
         /// Method For Take Damage
         /// </summary>
-        /// <param name="amountDamage"></param>
-        void TakeDamage(int amountDamage);
+        /// <param name="amountOfDamage"></param>
+        void TakeDamage(int amountOfDamage);
     }
 }
