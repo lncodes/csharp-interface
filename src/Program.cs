@@ -73,7 +73,7 @@ namespace Lncodes.Example.Interface
         private static int GetRandomDamageableCreatureTypeId()
         {
             var ammountOfDamageableCreatureTypes = 3;
-            return RandomNumberGenerator.GetInt32(0, ammountOfDamageableCreatureTypes);
+            return RandomNumberGenerator.GetInt32(ammountOfDamageableCreatureTypes);
         }
 
 
@@ -84,7 +84,7 @@ namespace Lncodes.Example.Interface
         private static int GetRandomAttackableCreatureTypeId()
         {
             var ammountOfAttackableCreatureTypes = 2;
-            return RandomNumberGenerator.GetInt32(0, ammountOfAttackableCreatureTypes);
+            return RandomNumberGenerator.GetInt32(ammountOfAttackableCreatureTypes);
         }
     }
 }
