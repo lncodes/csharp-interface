@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 
 namespace Lncodes.Example.Interface
 {
@@ -16,7 +17,7 @@ namespace Lncodes.Example.Interface
         public void Attack()
         {
             var accuracyRate = 50;
-            if (new Random().Next(100) < accuracyRate)
+            if (RandomNumberGenerator.GetInt32(100) < accuracyRate)
                 Console.WriteLine("The player has attacked");
             else
             {
