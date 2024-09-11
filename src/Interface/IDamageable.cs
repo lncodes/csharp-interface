@@ -1,16 +1,14 @@
-﻿namespace Lncodes.Example.Interface
+﻿namespace Lncodes.Example.Interface;
+
+public interface IDamageable
 {
-    public interface IDamageable
-    {
-        /// <value>Gets the Health value</value>
-        int Health { get; }
+    int Health { get; }
 
-        event System.Action OnHealthRunsOut;
+    event System.Action OnHealthRunsOut;
 
-        /// <summary>
-        /// Method For Take Damage
-        /// </summary>
-        /// <param name="amountOfDamage"></param>
-        void TakeDamage(int amountOfDamage);
-    }
+    /// <summary>
+    /// Applies damage to the entity.
+    /// </summary>
+    /// <param name="amountOfDamage">The amount of damage to apply.</param>
+    void TakeDamage(int amountOfDamage);
 }
