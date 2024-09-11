@@ -1,37 +1,42 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Lncodes.Example.Interface
+namespace Lncodes.Example.Interface;
+
+public sealed class EnemyController : IDamageable, IAttacker
 {
-    public sealed class EnemyController : IDamageable, IAttackable
+    public event Action OnHealthRunsOut;
+    public int Health { get; private set; } = 60;
+    public int AttackDamage { get; private set; } = 20;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EnemyController"/> class.
+    /// </summary>
+    public EnemyController() =>
+        OnHealthRunsOut += () => Console.WriteLine("Enemy is defeated");
+
+    ///<inheritdoc cref="IAttacker.Attack()"/>
+    public void Attack()
     {
-        public event Action OnHealthRunsOut;
-
-        ///<inheritdoc cref="IDamageable.Health"/>
-        public int Health { get; private set; } = 50;
-
-        ///<inheritdoc cref="IAttackable.AttackDamage"/>
-        public int AttackDamage { get; private set; } = 20;
-
-        ///<inheritdoc cref="IAttackable.Attack()"/>
-        public void Attack()
+        const int accuracyRate = 70;
+        if (RandomNumberGenerator.GetInt32(100) < accuracyRate)
         {
-            var accuracyRate = 60;
-            if (RandomNumberGenerator.GetInt32(100) < accuracyRate)
-                Console.WriteLine("The enemy has attacked");
-            else
-            {
-                AttackDamage = 0;
-                Console.WriteLine("Enemy attack failed");
-            }
+            AttackDamage = 20;
+            Console.WriteLine("The enemy's attack hit");
         }
-
-        ///<inheritdoc cref="IDamageable.TakeDamage(int)"/>
-        public void TakeDamage(int amountOfDamage)
+        else
         {
-            Health -= amountOfDamage;
-            if (Health == 0) OnHealthRunsOut();
-            Console.WriteLine($"Current enemy health = {Health}");
+            AttackDamage = 0;
+            Console.WriteLine("The enemy's attack miss");
         }
+    }
+
+    ///<inheritdoc cref="IDamageable.TakeDamage(int)"/>
+    public void TakeDamage(int amountOfDamage)
+    {
+        Health -= amountOfDamage;
+        Console.WriteLine($"Enemy's remaining health: {Health}");
+        Console.WriteLine();
+        if (Health <= 0) OnHealthRunsOut();
     }
 }
